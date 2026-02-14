@@ -1,0 +1,7 @@
+{
+  "name": "NexTrade Pro - Digital Brokerage",
+  "description": "A high-performance, professional digital brokerage platform. Ready for Play Store deployment with PWA features and Python-powered finance engine.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
