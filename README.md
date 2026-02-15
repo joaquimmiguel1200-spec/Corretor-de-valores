@@ -1,77 +1,56 @@
+# Corretor de Valores
 
-# NexTrade Pro - Documentação Técnica (Corretora Digital)
+## Project Overview
+This project aims to provide a comprehensive online trading platform for users to manage their investments in stocks, ETFs, cryptocurrencies, and more.
 
-NexTrade Pro é uma plataforma de corretagem digital moderna, escalável e segura, projetada para oferecer uma experiência de investimento de alto nível (estilo XP/Binance). O "coração" da plataforma é um motor financeiro desenvolvido em **Python**.
+## Architecture
+The architecture is divided into several components: backend, frontend, mobile app, and documentation, all designed to work seamlessly together to provide a smooth user experience.
 
-## 1. Arquitetura do Sistema
+## Technology Stack
+- **Backend**: FastAPI, PostgreSQL, Redis for caching
+- **Frontend**: React (with Next.js), Tailwind CSS
+- **Mobile**: React Native using Expo
+- **Deployment**: Docker, docker-compose
 
-A plataforma segue uma arquitetura de microsserviços desacoplada:
+## MVP Features
+- User authentication (login, registration, 2FA)
+- Asset trading (stocks, ETFs, etc.)
+- User dashboard
 
-- **Backend (Core)**: Desenvolvido em **Python 3.10+** utilizando **FastAPI**.
-  - Responsável pelo motor de ordens (Order Matching Engine).
-  - Gestão de riscos e validação de saldo (Real e Demo).
-  - Monitoramento de alertas de preço via daemon assíncrono.
-  - Integração com IA (Google Gemini) para análise preditiva.
-- **Frontend**: Desenvolvido em **React 18** com **TypeScript**.
-  - Interface reativa com Tailwind CSS.
-  - Gráficos inteligentes com Recharts.
-  - Estado global para gerenciamento de Conta Demo vs Real.
+## Full Features Roadmap
+- Advanced charting and trading features
+- Portfolio management tools
+- Watchlist capabilities
+- Real-time updates through WebSocket
 
-## 2. Funcionalidades Detalhadas
+## Security Implementation
+- JWT for authentication
+- 2-Factor Authentication for extra security
+- Secure connections using HTTPS
 
-### 🐍 Motor Python (main.py)
-O backend processa as transações financeiras com foco em baixa latência:
-- `POST /trade/execute`: Processa ordens de compra/venda.
-- `POST /alerts/create`: Registra triggers de preço no servidor.
-- `GET /market/assets`: Provê dados de mercado simulados ou via API externa.
+## SaaS Model
+- Subscription-based model with tiered pricing based on features and usage
 
-### 🧠 Inteligência NexTrade IA
-Utiliza o modelo **Gemini 2.5 Flash** para:
-- Analisar o perfil do investidor (Conservador a Arrojado).
-- Sugerir rebalanceamento de carteira.
-- Gerar sumários de mercado baseados em tendências de Python ML.
+## Setup Instructions
+1. Clone the repository: `git clone <repository_url>`
+2. Navigate to the directory: `cd Corretor-de-valores`
+3. Set up environment variables using `.env.example`
+4. Run the application using Docker: `docker-compose up`
 
-### 🎮 Modo Simulação (Conta Demo)
-- Saldo virtual de **R$ 1.000.000,00**.
-- Espelhamento de preços reais em ambiente isolado.
-- Interface com feedback visual (Orange Theme) para evitar confusão com conta real.
+## API Documentation Outline
+- User API: registration, login, profile management
+- Asset API: trading operations, asset management
+- Portfolio API: portfolio tracking and management
 
-## 3. Guia de Instalação e Execução
+## Database Schema Outline
+- Users table for user management
+- Assets table for storing information about tradable assets
+- Transactions table for tracking trade operations
 
-### Pré-requisitos
-- Python 3.10 ou superior.
-- Node.js & NPM (para o frontend).
+## Mobile App Requirements
+- Expo SDK
+- Integration with backend for API calls
 
-### Executando o Backend (Python)
-```bash
-pip install fastapi uvicorn pydantic
-python main.py
-```
-O servidor iniciará em `http://localhost:8000`.
-
-### Executando o Frontend
-O frontend é carregado automaticamente via `index.html`. Em ambiente de desenvolvimento, certifique-se de que o `process.env.API_KEY` está configurado para o funcionamento da IA.
-
-## 4. Requisitos para Play Store (App Nativo)
-
-Para transformar o NexTrade Pro em um app nativo da Play Store via **TWA (Trusted Web Activity)** ou **Capacitor**, os seguintes requisitos foram implementados:
-
-1.  **Responsividade Total**: Layout adaptável para smartphones, tablets e desktops.
-2.  **Manifesto PWA**: Arquivo `manifest.json` incluído para definição de ícones e cores de sistema.
-3.  **Segurança HTTPS**: Preparado para execução sob SSL (obrigatório para Play Store).
-4.  **Performance**: Carregamento assíncrono de módulos e assets otimizados.
-5.  **Iconografia**: Preparado para ícones adaptativos de 192px e 512px.
-
----
-
-## 5. Modelo SaaS (White-Label)
-A plataforma suporta multi-tenancy:
-- **Tenant Isolation**: Dados de cada corretora parceira são isolados via `tenant_id` no banco de dados.
-- **Custom UI**: Configurações de cores e logos via API dinâmica.
-- **Pricing Plans**:
-    - *Starter*: Taxas fixas, suporte padrão.
-    - *Pro*: Taxas customizáveis, API pública.
-    - *Enterprise*: Infra dedicada e auditoria completa.
-
----
-*Aviso Legal: NexTrade Pro é um simulador tecnológico. Não constitui oferta pública de valores mobiliários.*
+## Deployment Guide
+- Push to a cloud service like AWS or Heroku using Docker.
+- Ensure environment variables are set appropriately in production.
