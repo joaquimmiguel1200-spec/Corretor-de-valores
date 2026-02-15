@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: white;
+        }
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .clock {
+            font-size: 48px;
+            margin: 20px;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <h1>Digital Clock</h1>
+        <div class="clock" id="clock"></div>
+        <select id="timezone-select">
+            <option value="UTC">UTC</option>
+            <option value="America/New_York">New York (EST)</option>
+            <option value="Europe/London">London (GMT)</option>
+            <option value="Asia/Tokyo">Tokyo (JST)</option>
+            <option value="Australia/Sydney">Sydney (AEDT)</option>
+        </select>
+    </div>
+    <script>
+        function updateClock() {
+            const select = document.getElementById('timezone-select');
+            const timezone = select.value;
+            const options = { timeZone: timezone, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const formatter = new Intl.DateTimeFormat('en-US', options);
+            const date = new Date();
+            const formattedTime = formatter.format(date);
+            document.getElementById('clock').textContent = formattedTime;
+        }
+
+        document.getElementById('timezone-select').addEventListener('change', updateClock);
+
+        setInterval(updateClock, 1000);
+        updateClock(); // initial call
+    </script>
+</body>
+</html>
